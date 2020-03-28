@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="header">
+        <h3> Rock-Paper-Scissors: First to 5 wins!</h3>
+    </div>
+
+    <div id="topContainer">
+        <div id="logo">
+            <img src='https://www.pinclipart.com/picdir/big/329-3293970_thanks-again-i-tried-your-suggestion-of-increasing.png' alt="rock paper scissors logo bro">
+        </div>   
+<div id="scoreboard">
+<span> Let's Play Rock-Paper-Scissors!</span>
+</div>
+
+<div id="runningScore">
+    <span>Total Score:</span>
+</div>
+</div>
+
+
+    <div id="keys">
+      <div class="key">
+        <button class="btn" id="rock" >Rock</button>
+       
+      </div>
+      <div class="key">
+        <button class="btn" id = "paper" >Paper</button>
+    
+      </div>
+      <div class="key">
+        <button class="btn" id="scissors">Scissors</button>
+       
+      </div>
+    </div>
+
+<script>
+
+let playerScore = 0;
+let computerScore = 0;
+
+function computerPlay(){
+   let randomNum = Math.floor(Math.random() * 3) +1; 
+if (randomNum == 1){
+    return "ROCK";}
+    else if (randomNum == 2){
+        return "SCISSORS";}
+        else {
+            return "PAPER";}
+}
+
+function rockButton(){
+
+    let playerSelection = "ROCK";
+    let computerSelection = computerPlay();
+    
+if(computerSelection == "SCISSORS"){
+    playerScore++;
+    let result = "Congrats, Rock crushes Scissors!";
+    scoreboard.textContent = `${result}`; 
+}
+else if (computerSelection == "PAPER"){
+    computerScore++;
+    let result = "Sorry, Paper covers Rock!";
+    scoreboard.textContent = `${result}`; 
+}
+else {
+    let result = "Looks like we have a tie. No points awarded.";
+    scoreboard.textContent = `${result}`; 
+}
+
+addPoints();
+}
+
+function scissorButton(){
+
+let playerSelection = "SCISSORS";
+let computerSelection = computerPlay();
+
+if(computerSelection == "PAPER"){
+playerScore++;
+let result = `Congrats, Scissors cuts Paper!`
+scoreboard.textContent = `${result}`; 
+}
+
+else if (computerSelection == "ROCK"){
+computerScore++;
+let result = `Sorry, Rock crushes Scissors!`;
+scoreboard.textContent = `${result}`; 
+}
+else {
+let result = `Looks like we have a tie. No points awarded.`
+scoreboard.textContent = `${result}`; 
+}
+addPoints();
+}
+
+function paperButton(){
+
+let playerSelection = "PAPER";
+let computerSelection = computerPlay();
+
+if(computerSelection == "ROCK"){
+playerScore++;
+let result = `Congrats, Paper covers Rock!`
+scoreboard.textContent = `${result}`; 
+}
+else if (computerSelection == "SCISSORS"){
+computerScore++;
+let result = `Sorry, Scissors cuts Paper!`;
+scoreboard.textContent = `${result}`; 
+}
+else {
+let result = `Looks like we have a tie. No points awarded.`
+scoreboard.textContent = `${result}`; 
+}
+addPoints();
+}
+
+function addPoints(){
+    document.getElementById('runningScore').textContent = `Your Score: ${playerScore} Computer Score: ${computerScore}`;
+
+    if (playerScore == 5){
+        computerScore = 0;
+        playerScore = 0;
+        alert("Congrats! You Won!");
+    }
+    else if( computerScore == 5) {
+        computerScore = 0;
+        playerScore = 0;
+        alert("Better luck next time");
+    }
+    else {return}
+}
+
+
+// function finalScore(){
+//     if (playerScore == computerScore){
+//         document.getElementById('runningScore').textContent = "It's a tie! Let's play again?";
+//     }
+//     else if (playerScore > computerScore){
+//         document.getElementById('runningScore').textContent = "It's a tie! Let's play again?";
+//     }
+//     else {
+//         document.getElementById('runningScore').textContent = "It's a tie! Let's play again?"
+//         + '\n'
+//         + " Final Score: " + playerScore + " to " + computerScore;
+//     }
+// }
+
+
+
+const glow = document.querySelectorAll('button');
+glow.forEach((button) => {
+  button.addEventListener('click', function(e){
+    button.classList.add('playing')  
+  }); 
+});
+
+function removeTransition(e){
+  if(e.propertyName !== 'transform') return;
+  this.classList.remove('playing'); 
+}
+
+const keys = document.querySelectorAll('button');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+rock.addEventListener('click', rockButton);
+
+paper.addEventListener('click', paperButton);
+
+scissors.addEventListener('click', scissorButton);
+
+
+// function game(){
+// playerScore = 0;
+// computerScore = 0;
+// finalScore();
+// }
+
+
+</script>
+
+
+    </body>
+    </html>
